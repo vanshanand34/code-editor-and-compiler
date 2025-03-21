@@ -1,9 +1,11 @@
 import { NativeSelect, Box, Text } from "@chakra-ui/react";
 import React from "react";
+import { LANGUAGES } from "./constants";
 
 export function LanguageSelector({ value, onChange }) {
 
-    const languages = ["javascript", "typescript", "python", "cpp"]
+    const languages = Object.entries(LANGUAGES);
+    console.log(languages);
 
     return (
         <Box padding={4} >
@@ -16,13 +18,13 @@ export function LanguageSelector({ value, onChange }) {
                     color={"white"}
                 >
                     {
-                        languages.map(lang => (
-                            <option 
-                                value={lang} 
-                                key={lang}
+                        languages.map((lang) => (
+                            <option
+                                value={lang[0]}
+                                key={lang[0]}
                                 style={{ backgroundColor: '#27272a' }}
                             >
-                                {lang}
+                                {lang[0]} ({lang[1]})
                             </option>
                         ))
                     }

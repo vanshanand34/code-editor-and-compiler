@@ -44,7 +44,7 @@ export default function CodeEditor() {
                         />
                     </Box>
                 </Box>
-                <Output/>
+                <Output editorRef={editorRef} language={language}/>
             </HStack>
         </Box>
     )
