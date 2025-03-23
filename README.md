@@ -33,4 +33,4 @@ Chakra UI is used for styling
 
 ## API for code output
 
-[Piston]("https://emkc.org/api/v2/piston") API is used for running the code and get output
+[Piston]("https://emkc.org/api/v2/piston") API is used for running the code and generate output
