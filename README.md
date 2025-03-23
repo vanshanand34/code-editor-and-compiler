@@ -20,15 +20,17 @@ The **Code Editor** is a web-based application that enables users to write, edit
     
 ## Monaco Editor
 
-monaco-editor react module is used for the editor
+The monaco-editor react module is used for the editor
 
 Run `npm install monaco-editor` to install.
+
 
 ## Chakra-UI
 
 Chakra UI is used for styling
 
 
+
 ## API for code output
 
-[piston]("https://emkc.org/api/v2/piston") API is ued for running the code and get output
+[Piston]("https://emkc.org/api/v2/piston") API is used for running the code and get output
