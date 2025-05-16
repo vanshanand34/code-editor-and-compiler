@@ -13,7 +13,6 @@ export default function CodeEditor() {
 
     function onEditorDidMount(editor, monaco) {
         editorRef.current = editor;
-        console.log(editor)
         editor.focus();
     }
 
@@ -25,15 +24,53 @@ export default function CodeEditor() {
     }
 
     return (
-        <Box bg={'#101018'} height={'100vh'}>
-            <HStack borderSpacing={4}>
-                <Box width={'50%'}>
-                    <LanguageSelector value={language} onChange={handleLanguageChange} />
+        <Box bg={'#252525'} minHeight={'100vh'} px={6} height={'100%'}>
+            <Box
+                width={'100%'}
+                padding={4}
+                pt={6}
+                color={'white'}
+                textAlign={'center'}
+                fontSize={'4xl'}
+                fontWeight={'bold'}
+            >
+                Code Compiler
+            </Box>
+
+            <HStack
+                borderSpacing={4}
+                paddingY={6}
+                display={'flex'}
+                flexDir={'column'}
+                alignItems={'center'}
+                lg={{ flexDirection: 'row' }}
+                gapY={4}
+                flexBasis={'-moz-max-content'}
+            >
+                <Box
+                    width={'100%'}
+                    lg={{ width: '50%' }}
+                    height={'60vh'}
+                    md={{ height: '80vh' }}
+                    paddingX={4}
+                >
+
                     <Box
-                        paddingX={4}
+                        borderRadius={'lg'}
+                        overflow={'hidden'}
+                        border={'1px solid #fff2'}
+                        bg={'#1e1e1e'}
+                        height={'100%'}
                     >
+                        <Box
+                            bg={'blackAlpha.500'}
+                            padding={4}
+                            mb={6}
+                        >
+                            <LanguageSelector value={language} onChange={handleLanguageChange} />
+                        </Box>
+
                         <Editor
-                            height={"75vh"}
                             defaultLanguage="javascript"
                             language={language}
                             defaultValue={DEFAULT_CODE_SNIPPETS[language]}
@@ -44,7 +81,12 @@ export default function CodeEditor() {
                         />
                     </Box>
                 </Box>
-                <Output editorRef={editorRef} language={language}/>
+
+                <Output
+                    editorRef={editorRef}
+                    language={language}
+                />
+
             </HStack>
         </Box>
     )

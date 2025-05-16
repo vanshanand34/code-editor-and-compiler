@@ -8,14 +8,17 @@ export function LanguageSelector({ value, onChange }) {
     console.log(languages);
 
     return (
-        <Box padding={4} >
-            <Text padding={2} color={'gray.300'} >Language:</Text>
-            <NativeSelect.Root size="sm" width={"1/3"} padding={1} variant={'subtle'}>
+        <Box padding={0}
+        >
+            {/* <Text padding={2} color={'gray.300'} >Language:</Text> */}
+            <NativeSelect.Root size={'sm'} width={"1/3"} padding={0} variant={'subtle'}>
                 <NativeSelect.Field
                     value={value}
                     onChange={onChange}
                     bg={'gray.800'}
                     color={"white"}
+                    cursor={'pointer'}
+
                 >
                     {
                         languages.map((lang) => (
@@ -31,6 +34,6 @@ export function LanguageSelector({ value, onChange }) {
                 </NativeSelect.Field>
                 <NativeSelect.Indicator />
             </NativeSelect.Root>
-        </Box>
+        </Box >
     )
 }

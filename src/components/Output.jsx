@@ -2,6 +2,8 @@ import { Box, Button, Spinner, Text, Textarea } from "@chakra-ui/react";
 import executeCode from "./runCode";
 import { useState } from "react";
 import { Toaster, toaster } from "./ui/toaster";
+import UserInputComponent from "./Output/InputUtil";
+import OutputComponent from "./Output/OutputUtil";
 
 export default function Output({ language, editorRef }) {
 
@@ -41,53 +43,40 @@ export default function Output({ language, editorRef }) {
     }
 
     return (
-        <Box width={'50%'} color={"white"} p={2}>
-            <Toaster />
-            <Text marginBottom={2} fontSize={'lg'} paddingTop={5} >Output</Text>
-            <Button
-                variant={"outline"}
-                marginBottom={4}
-                fontSize={'smaller'}
-                paddingX={2} paddingY={0.5}
-                borderColor={"green"}
-                color={"gray.200"}
-                _hover={{ color: "green" }}
-                onClick={runCode}
-            >
-                {isLoading && <Spinner size={'sm'} />}
-                Run Code
-            </Button>
+
+        <Box
+            width={'100%'}
+            md={{ width: '80%', height: '80vh' }}
+            lg={{ width: '50%' }}
+            overflow={'hidden'}
+            paddingX={4}
+            display={'flex'}
+            flexDirection={'column'}
+            gapY={4}
+            height={'60vh'}
+        >
+            <UserInputComponent userInput={userInput} setUserInput={setUserInput} />
+
+            {/* Output */}
 
             <Box
-                height={'15vh'}
+                color={"white"}
+                overflow={'hidden'}
+                border={'1px solid #333'}
+                bg={'#1e1e1e'}
+                borderRadius={8}
+                flex={1}
             >
-                <Textarea
-                    fontSize={'medium'}
-                    placeholder="Input"
-                    border={"1px solid #333"}
-                    borderRadius={4}
-                    height={"90%"}
-                    value={userInput}
-                    onChange={(e) => setUserInput(e.target.value)}
-                ></Textarea>
+                <Toaster />
 
-            </Box>
-
-            <Box
-                height={"60vh"}
-                p={2}
-                border={"1px solid"}
-                borderRadius={4}
-                borderColor={isError ? "red.500" : "#333"}
-                color={isError ? "red.300" : "gray.500"}
-            >{
-                    (
-                        output.split("\n").map(
-                            (outputLine, index) =>
-                                <Text key={index}>{outputLine}</Text>
-                        )
-                    ) || "Click 'Run Code' to see the output here"}
+                <OutputComponent
+                    isError={isError}
+                    isLoading={isLoading}
+                    output={output}
+                    runCode={runCode}
+                />
             </Box>
         </Box>
     )
 }
+
