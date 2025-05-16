@@ -8,7 +8,7 @@ const API = axios.create({
     baseURL: baseURL
 });
 
-async function executeCode(language, sourceCode) {
+async function executeCode(language, sourceCode, userInput = "") {
     try {
         console.log(language, sourceCode)
         const response = await API.post("/execute", {
@@ -16,7 +16,8 @@ async function executeCode(language, sourceCode) {
             version: LANGUAGES[language],
             files: [
                 { content: sourceCode }
-            ]
+            ],
+            stdin: userInput
         });
 
         return response.data;

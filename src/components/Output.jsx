@@ -1,4 +1,4 @@
-import { Box, Button, Spinner, Text } from "@chakra-ui/react";
+import { Box, Button, Spinner, Text, Textarea } from "@chakra-ui/react";
 import executeCode from "./runCode";
 import { useState } from "react";
 import { Toaster, toaster } from "./ui/toaster";
@@ -6,6 +6,7 @@ import { Toaster, toaster } from "./ui/toaster";
 export default function Output({ language, editorRef }) {
 
     const [output, setOutput] = useState("");
+    const [userInput, setUserInput] = useState("");
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -14,7 +15,7 @@ export default function Output({ language, editorRef }) {
         try {
             const sourceCode = editorRef.current.getValue();
             if (!sourceCode) return;
-            const { run: result } = await executeCode(language, sourceCode);
+            const { run: result } = await executeCode(language, sourceCode, userInput);
             setOutput(result.output);
 
             setIsError(result.code == 1 ? true : false);
@@ -56,8 +57,24 @@ export default function Output({ language, editorRef }) {
                 {isLoading && <Spinner size={'sm'} />}
                 Run Code
             </Button>
+
             <Box
-                height={"75vh"}
+                height={'15vh'}
+            >
+                <Textarea
+                    fontSize={'medium'}
+                    placeholder="Input"
+                    border={"1px solid #333"}
+                    borderRadius={4}
+                    height={"90%"}
+                    value={userInput}
+                    onChange={(e) => setUserInput(e.target.value)}
+                ></Textarea>
+
+            </Box>
+
+            <Box
+                height={"60vh"}
                 p={2}
                 border={"1px solid"}
                 borderRadius={4}
