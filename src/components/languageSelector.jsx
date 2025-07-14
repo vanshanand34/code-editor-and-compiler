@@ -1,39 +1,61 @@
-import { NativeSelect, Box, Text } from "@chakra-ui/react";
+import { Select, Box, Portal, createListCollection } from "@chakra-ui/react";
 import React from "react";
-import { LANGUAGES } from "./constants";
+import { LANGUAGES, DEFAULT_CODE_SNIPPETS } from "./constants";
 
-export function LanguageSelector({ value, onChange }) {
 
-    const languages = Object.entries(LANGUAGES);
-    console.log(languages);
+export function LanguageSelector({ value, setValue, setCodeSnippet }) {
+
+    const language_names = Object.keys(LANGUAGES); //LANGUAGES.
+    const languages_collection = [];
+    for (const lang of language_names) {
+        languages_collection.push({
+            "label": lang,
+            "value": lang
+        });
+    }
+    const languages = createListCollection({
+        items: languages_collection
+    });
+
 
     return (
-        <Box padding={0}
-        >
-            {/* <Text padding={2} color={'gray.300'} >Language:</Text> */}
-            <NativeSelect.Root size={'sm'} width={"1/3"} padding={0} variant={'subtle'}>
-                <NativeSelect.Field
-                    value={value}
-                    onChange={onChange}
-                    bg={'gray.800'}
-                    color={"white"}
-                    cursor={'pointer'}
-
-                >
-                    {
-                        languages.map((lang) => (
-                            <option
-                                value={lang[0]}
-                                key={lang[0]}
-                                style={{ backgroundColor: '#27272a' }}
-                            >
-                                {lang[0]} ({lang[1]})
-                            </option>
-                        ))
+        <Box>
+            <Select.Root
+                className='dark'
+                size={'sm'}
+                width={"1/3"}
+                cursor={'pointer'}
+                onValueChange={
+                    (e) => {
+                        setValue(e.value)
+                        setCodeSnippet(DEFAULT_CODE_SNIPPETS[e.value[0]])
                     }
-                </NativeSelect.Field>
-                <NativeSelect.Indicator />
-            </NativeSelect.Root>
-        </Box >
+                }
+                value={value}
+                collection={languages}
+            >
+                <Select.HiddenSelect />
+                <Select.Control>
+                    <Select.Trigger>
+                        <Select.ValueText placeholder="Select Language" />
+                    </Select.Trigger>
+                    <Select.IndicatorGroup>
+                        <Select.Indicator />
+                    </Select.IndicatorGroup>
+                </Select.Control>
+                <Portal>
+                    <Select.Positioner>
+                        <Select.Content>
+                            {languages_collection.map((lang) => (
+                                <Select.Item item={lang} key={lang.value}>
+                                    {lang.label}
+                                    <Select.ItemIndicator />
+                                </Select.Item>
+                            ))}
+                        </Select.Content>
+                    </Select.Positioner>
+                </Portal>
+            </Select.Root>
+        </Box>
     )
 }

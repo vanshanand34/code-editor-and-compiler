@@ -1,9 +1,9 @@
 import { Box, Button, Spinner, Text, Textarea } from "@chakra-ui/react";
 import executeCode from "./runCode";
 import { useState } from "react";
-import { Toaster, toaster } from "./ui/toaster";
-import UserInputComponent from "./Output/InputUtil";
-import OutputComponent from "./Output/OutputUtil";
+import { Toaster, toaster } from "../ui/toaster";
+import UserInputComponent from "./InputUtil";
+import OutputComponent from "./OutputUtil";
 
 export default function Output({ language, editorRef }) {
 
@@ -46,7 +46,7 @@ export default function Output({ language, editorRef }) {
 
         <Box
             width={'100%'}
-            md={{ width: '80%', height: '80vh' }}
+            md={{ height: '80vh' }}
             lg={{ width: '50%' }}
             overflow={'hidden'}
             paddingX={4}
@@ -59,23 +59,12 @@ export default function Output({ language, editorRef }) {
 
             {/* Output */}
 
-            <Box
-                color={"white"}
-                overflow={'hidden'}
-                border={'1px solid #333'}
-                bg={'#1e1e1e'}
-                borderRadius={8}
-                flex={1}
-            >
-                <Toaster />
-
-                <OutputComponent
-                    isError={isError}
-                    isLoading={isLoading}
-                    output={output}
-                    runCode={runCode}
-                />
-            </Box>
+            <OutputComponent
+                isError={isError}
+                isLoading={isLoading}
+                output={output}
+                runCode={runCode}
+            />
         </Box>
     )
 }

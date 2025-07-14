@@ -1,34 +1,28 @@
 import { Box, HStack } from "@chakra-ui/react"
 import { Editor } from "@monaco-editor/react"
 import { useState, useRef } from "react";
-import { LanguageSelector } from "./languageSelector";
-import { DEFAULT_CODE_SNIPPETS } from "./constants";
-import Output from "./Output";
+import { LanguageSelector } from "./components/languageSelector";
+import { DEFAULT_CODE_SNIPPETS } from "./components/constants";
+import Output from "./components/Output/Output";
 
 export default function CodeEditor() {
 
-    const [language, setLanguage] = useState("javascript");
+    const [language, setLanguage] = useState(["javascript"]);
     const [value, setValue] = useState("");
     const editorRef = useRef(null);
 
     function onEditorDidMount(editor, monaco) {
+        monaco;
         editorRef.current = editor;
         editor.focus();
     }
 
-    function handleLanguageChange(e) {
-        const lang = e.target.value;
-        setLanguage(lang);
-        console.log(editorRef)
-        setValue(DEFAULT_CODE_SNIPPETS[lang]);
-    }
-
     return (
-        <Box bg={'#252525'} minHeight={'100vh'} px={6} height={'100%'}>
+        <Box minHeight={'100vh'} px={6} py={8} height={'100%'}>
             <Box
                 width={'100%'}
                 padding={4}
-                pt={6}
+                py={6}
                 color={'white'}
                 textAlign={'center'}
                 fontSize={'4xl'}
@@ -67,13 +61,13 @@ export default function CodeEditor() {
                             padding={4}
                             mb={6}
                         >
-                            <LanguageSelector value={language} onChange={handleLanguageChange} />
+                            <LanguageSelector value={language} setValue={setLanguage} setCodeSnippet={setValue}/>
                         </Box>
 
                         <Editor
                             defaultLanguage="javascript"
-                            language={language}
-                            defaultValue={DEFAULT_CODE_SNIPPETS[language]}
+                            language={language[0]}
+                            defaultValue={DEFAULT_CODE_SNIPPETS[language[0]]}
                             onChange={(value) => setValue(value)}
                             theme="vs-dark"
                             onMount={onEditorDidMount}
@@ -84,7 +78,7 @@ export default function CodeEditor() {
 
                 <Output
                     editorRef={editorRef}
-                    language={language}
+                    language={language[0]}
                 />
 
             </HStack>
