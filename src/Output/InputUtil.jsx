@@ -1,18 +1,22 @@
 import React from "react"
 import { Box, Text, Textarea } from "@chakra-ui/react"
+import { HeaderColor } from "../styleConstants"
 
 export default function UserInputComponent({ userInput, setUserInput }) {
     return (
         <Box
             border={"1px solid #333"}
             borderRadius={8}
+            bg={'#1e1e1e'}
             overflow={'hidden'}
         >
             <Text
-                px={3} py={4}
+                padding={2}
+                pl={4}
                 fontSize={'md'}
-                bg={'blackAlpha.600'}
+                bg={HeaderColor}
                 color={"white"}
+                md={{ fontSize: 'lg' }}
             >
                 Input
             </Text>
@@ -22,11 +26,11 @@ export default function UserInputComponent({ userInput, setUserInput }) {
                 color={'white'}
                 fontSize={'medium'}
                 border={0}
+                outline={0}
                 verticalAlign={'top'}
                 borderRadius={0}
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
-                bg={'#1e1e1e'}
 
             ></Textarea>
 

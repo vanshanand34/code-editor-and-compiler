@@ -1,6 +1,6 @@
 import { Select, Box, Portal, createListCollection } from "@chakra-ui/react";
 import React from "react";
-import { LANGUAGES, DEFAULT_CODE_SNIPPETS } from "./constants";
+import { LANGUAGES, DEFAULT_CODE_SNIPPETS } from "../constants";
 
 
 export function LanguageSelector({ value, setValue, setCodeSnippet }) {
@@ -19,10 +19,13 @@ export function LanguageSelector({ value, setValue, setCodeSnippet }) {
 
 
     return (
-        <Box>
+        <Box 
+        flex={1}
+        >
             <Select.Root
                 className='dark'
                 size={'sm'}
+                md={{ size: 'md' }}
                 width={"1/3"}
                 cursor={'pointer'}
                 onValueChange={
@@ -35,8 +38,8 @@ export function LanguageSelector({ value, setValue, setCodeSnippet }) {
                 collection={languages}
             >
                 <Select.HiddenSelect />
-                <Select.Control>
-                    <Select.Trigger>
+                <Select.Control >
+                    <Select.Trigger bg={'#151515'}>
                         <Select.ValueText placeholder="Select Language" />
                     </Select.Trigger>
                     <Select.IndicatorGroup>

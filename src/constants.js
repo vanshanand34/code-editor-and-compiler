@@ -2,7 +2,7 @@ export const LANGUAGES = {
     javascript: "18.15.0",
     typescript: "5.0.3",
     python: "3.10.0",
-    cpp: "10.1.0",
+    cpp: "10.2.0",
 };
 
 export const DEFAULT_CODE_SNIPPETS = {

@@ -1,9 +1,10 @@
 import React from "react";
 import { Box, Button, Spinner, Text } from "@chakra-ui/react";
-import { Toaster } from "../ui/toaster";
+import { Toaster } from "../components/ui/toaster";
+import { HeaderColor } from "../styleConstants";
 
 
-export default function OutputComponent({ isError, isLoading, output, runCode }) {
+export default function OutputComponent({ isError, output }) {
 
     const formattedOutput = output
         .split('\n')
@@ -36,31 +37,14 @@ export default function OutputComponent({ isError, isLoading, output, runCode })
                     alignItems={'center'}
                     justifyContent={'space-between'}
                     padding={2}
-                    px={3}
-                    bg={'blackAlpha.500'}
+                    pl={4}
+                    bg={HeaderColor}
                     top={0}
                 >
-                    <Text fontSize={'md'} >
+                    <Text fontSize={'md'} md={{ fontSize: 'lg' }}>
                         Output
                     </Text>
 
-                    <Button
-                        variant={"outline"}
-                        fontSize={'xs'}
-                        md={{
-                            fontSize: 'md',
-                            px: 3,
-                            py: 0.5
-                        }}
-                        paddingX={2} paddingY={0}
-                        borderColor={"#fff3"}
-                        color={"gray.200"}
-                        _hover={{ color: "gray.600" }}
-                        onClick={runCode}
-                    >
-                        {isLoading && <Spinner size={'sm'} animationDuration={'slowest'} />}
-                        Run Code
-                    </Button>
                 </Box>
                 <Box
                     px={2}
